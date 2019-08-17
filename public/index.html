@@ -1,0 +1,38 @@
+
+<html>
+	<head>
+		<title>My first three.js app</title>
+		<link rel="stylesheet" type="text/css" href="http://localhost:3000/public/css/style.css"> 
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.js"></script>
+		<script src="http://localhost:3000/public/modelLoader.js" type="text/javascript"></script>
+		<script src="http://localhost:3000/public/GLTFLoader.js"></script>
+		<script src="http://localhost:3000/public/libraries/p5.js"></script>
+		<script> 
+			//setup
+			var scene = new THREE.Scene();
+			scene.background = new THREE.Color( 1, 1, 1 );
+			var cam = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+			cam.position.z = 20;
+
+			var renderer = new THREE.WebGLRenderer({antialias: true});
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			//light
+			var light = new THREE.PointLight( 0xFFFFFF, 1, 500 );
+			light.position.set( 30, 20, 10 );
+			scene.add( light );
+
+			window.addEventListener('resize' , () =>{
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				cam.aspect = window.innerWidth / window.innerHeight ;
+
+				cam.updateProjectionMatrix();
+			})
+		</script>
+		<script src="http://localhost:3000/public/main.js"></script>
+		<script src="http://localhost:3000/public/input.js"></script>
+	</body>
+</html>
