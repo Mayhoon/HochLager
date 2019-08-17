@@ -4,7 +4,9 @@ var dt;
 
 //scene
 var cube = createCube();
-scene.add( cube );
+var pipe = createPipe();
+//scene.add( cube );
+scene.add( pipe );
 
 
 //animate
@@ -12,8 +14,8 @@ var animate = function () {
 	requestAnimationFrame( animate );
   	dt = clock.getDelta();
 
-  	cube.rotation.x += 0.001;
-  	cube.rotation.y += 0.001;
+  	pipe.rotation.x += 0.001;
+  	pipe.rotation.y += 0.001;
 
 	renderer.render( scene, cam );
 };
