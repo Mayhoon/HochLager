@@ -6,12 +6,18 @@
 	</head>
 	<body>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.js"></script>
+
+		<script src="http://localhost:3000/public/StorageUnit.js"></script>
+		<script src="http://localhost:3000/public/Config.js"></script>
+		<script src="http://localhost:3000/public/Stats.js"></script>
 		<script> 
+
 			//setup
 			var scene = new THREE.Scene();
 			scene.background = new THREE.Color( 1, 1, 1);
 			var cam = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-			cam.position.z = 10;
+			cam.position.z = 25;
+			cam.position.x = storageWidth;
 
 			var renderer = new THREE.WebGLRenderer({antialias: true});
 			renderer.setSize( window.innerWidth, window.innerHeight );
