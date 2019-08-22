@@ -7,6 +7,10 @@ document.body.appendChild( stats.dom );
 //scene
 generateStorage();
 
+var light = new THREE.PointLight( 0xff0000, 1, 100 );
+light.position.set( 60, 50, 50 );
+scene.add( light );
+
 var arrow = new THREE.ArrowHelper(
         // first argument is the direction
         new THREE.Vector3(1, 0, 0).normalize(),
@@ -35,6 +39,14 @@ animate();
 
 
 function generateStorage(){
+	//ground
+	var texture = new THREE.TextureLoader().load(localhost+'assets/Images/metallic2.jpg',); 
+	var geometry = new THREE.BoxGeometry( storageWidth * storageUnitSize, 0.1, storageWidth * storageUnitSize );
+	var material = new THREE.MeshBasicMaterial( { map:this.texture } );
+	var t = new THREE.Mesh( geometry, material );
+	t.position.set(0,-10,0);
+	scene.add(t);
+	
 	//Units
 	for(var width = 0; width < storageWidth ; width++){
 		for(var depth = 0; depth < storageDepth ; depth++){
