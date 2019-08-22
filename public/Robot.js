@@ -1,3 +1,5 @@
-class Robot () {
-	
+class Robot {
+	constructor(){
+		
+	}
 }
