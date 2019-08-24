@@ -13,22 +13,17 @@ addHelperArrows();
 
 //animate
 var animate = function () {
-	raycaster.setFromCamera( mouse, cam );
-	var intersects = raycaster.intersectObjects( scene.children );
-	for ( var i = 0; i < intersects.length; i++ ) {	
-		intersects[ i ].object.material.color.set( 0xff0000 );
-	}
-
+	raycaster.setFromCamera( mouse, cam );	
 	stats.begin();
 	dt = clock.getDelta();
-
 	scene.rotation.y += 0.2 * dt;	
-	renderer.render( scene, cam );
 
+	renderer.render( scene, cam );
 	requestAnimationFrame( animate );
+
 	stats.end();
 };
-window.addEventListener( 'mousemove', onMouseMove, false );
+window.addEventListener( 'mousedown', onMouseDown, false );
 animate();
 
 function generateStorage(){
@@ -41,19 +36,24 @@ function onMouseMove( event ) {
 	// calculate mouse position in normalized device coordinates	(-1 to +1) for both components
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-	console.log("Mouse moved");
+}
+
+function onMouseDown( event ){
+	var intersects = raycaster.intersectObjects( scene.children );
+	intersects[0].object.callback();
 }
 
 function addHelperArrows(){
-	var xArrow = new THREE.ArrowHelper( new THREE.Vector3(1, 0, 0).normalize(), new THREE.Vector3(0, 20, 0), 20.2, 0x00ff00);
-	var yArrow = new THREE.ArrowHelper( new THREE.Vector3(0, 1, 0).normalize(), new THREE.Vector3(0, 20, 0), 20.2, 0x00ff00);
-	var zArrow = new THREE.ArrowHelper( new THREE.Vector3(0, 0, 1).normalize(), new THREE.Vector3(0, 20, 0), 20.2, 0x00ff00);
+	var xArrow = new THREE.ArrowHelper( new THREE.Vector3(1, 0, 0).normalize(), new THREE.Vector3(0, 0, 0), 20.2, 0x00ff00);
+	var yArrow = new THREE.ArrowHelper( new THREE.Vector3(0, 1, 0).normalize(), new THREE.Vector3(0, 0, 0), 20.2, 0x00ff00);
+	var zArrow = new THREE.ArrowHelper( new THREE.Vector3(0, 0, 1).normalize(), new THREE.Vector3(0, 0, 0), 20.2, 0x00ff00);
 	scene.add(xArrow, yArrow, zArrow);
 }
 
 function addLight(){
 	var light = new THREE.PointLight( 0xff0000, 1, 100 );
 	light.position.set( 60, 50, 50 );
+	light.castShadow = true;
 	scene.add( light );
 }
 
@@ -75,7 +75,6 @@ function generateStorageUnits(){
 			}
 		}
 	}	
-
 	for(let i in storage){
 		scene.add(storage[i].cube);
 	}
@@ -88,7 +87,6 @@ function generateStoragePipes(){
 			);
 		}
 	}
-
 	for(let p in pipes){
 		scene.add(pipes[p].pipe);
 	}

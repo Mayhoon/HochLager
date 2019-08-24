@@ -6,6 +6,11 @@ class StorageUnit{
 		this.geometry = new THREE.BoxGeometry( storageUnitSize, storageUnitSize, storageUnitSize );
 		this.material = new THREE.MeshBasicMaterial( { map: this.texture } );
 		this.cube = new THREE.Mesh( this.geometry, this.material );
+		this.cube.callback = this.saySomething; //Recieves clicks
 		this.cube.position.set(x,y,z);
+	}
+
+	saySomething(){
+		console.log("HEY Ho");
 	}
 }

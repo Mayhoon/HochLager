@@ -21,4 +21,3 @@ const storagePipeHeight = storageUnitSize * storageUnitSize;
 const pipeXPosInterval = storageUnitSize+1;
 const pipeZPosInterval = storageUnitSize+1;
 const pipeYPos = (storageHeight * storageUnitSize)/2 - storageUnitSize;
-

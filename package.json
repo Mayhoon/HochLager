@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "loadscreen": "^0.18.14",
     "stats.js": "^0.17.0",
     "three-orbitcontrols-ts": "^0.1.2"
   }
