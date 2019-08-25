@@ -1,16 +1,22 @@
 class StorageUnit{
-	constructor(x,y,z){
-		console.log("New Unit");
+	constructor(x,y,z){		
+		this.x = 20;
+		this.someText = "Hey"
+		this.goods = ["Test"];
 
 		this.texture = new THREE.TextureLoader().load( localhost+'assets/Images/crate0/crate0_diffuse.png' );
 		this.geometry = new THREE.BoxGeometry( storageUnitSize, storageUnitSize, storageUnitSize );
 		this.material = new THREE.MeshBasicMaterial( { map: this.texture } );
 		this.cube = new THREE.Mesh( this.geometry, this.material );
-		this.cube.callback = this.saySomething; //Recieves clicks
+		this.cube.callback = this.showInfo; //receives clicks
 		this.cube.position.set(x,y,z);
+
 	}
 
-	saySomething(){
-		console.log("HEY Ho");
+	showInfo(){
+		console.log("This does work");
+		console.log(this.x); 		// undefined
+		console.log(this.someText); // undefined
+		console.log(this.goods[0]); // returns nothing
 	}
 }

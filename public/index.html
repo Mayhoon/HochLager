@@ -24,8 +24,7 @@
 
 			window.addEventListener('resize' , () =>{
 				renderer.setSize( window.innerWidth, window.innerHeight );
-				cam.aspect = window.innerWidth / window.innerHeight ;
-
+				cam.aspect = window.innerWidth / window.innerHeight;
 				cam.updateProjectionMatrix();
 			})
 		</script>
