@@ -1,4 +1,5 @@
 var dt;
+var intersects;
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 var stats = new Stats();
@@ -34,6 +35,7 @@ function generateStorage(){
 }
 
 function onMouseMove( event ) {
+	event.preventDefault();
 	// calculate mouse position in normalized device coordinates	(-1 to +1) for both components
 	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
@@ -41,8 +43,9 @@ function onMouseMove( event ) {
 }
 
 function onMouseDown( event ){
+	//storage[0].showInfo();
 	try{
-		var intersects = raycaster.intersectObjects( scene.children );
+		intersects = raycaster.intersectObjects( scene.children );
 		intersects[0].object.callback();
 	}catch(e){
 		
@@ -89,8 +92,7 @@ function generateStorageUnits(){
 function generateStoragePipes(){
 	for(var width = -0.5; width < storageWidth; width++){
 		for(var depth = -0.5; depth < storageDepth; depth++){
-			pipes.push(new Pipe(width*pipeXPosInterval, pipeYPos, depth*pipeZPosInterval)
-			);
+			pipes.push(new Pipe(width*pipeXPosInterval, pipeYPos, depth*pipeZPosInterval));
 		}
 	}
 	for(let p in pipes){

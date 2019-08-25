@@ -8,15 +8,15 @@ class StorageUnit{
 		this.geometry = new THREE.BoxGeometry( storageUnitSize, storageUnitSize, storageUnitSize );
 		this.material = new THREE.MeshBasicMaterial( { map: this.texture } );
 		this.cube = new THREE.Mesh( this.geometry, this.material );
-		this.cube.callback = this.showInfo; //receives clicks
+
+		this.cube.callback = (() => {
+			console.log("This does work");
+			console.log(this.x); 		// undefined
+			console.log(this.someText); // undefined
+			console.log(this.goods[0]); // returns nothing
+		}); 	//receives clicks
+	
+	
 		this.cube.position.set(x,y,z);
-
-	}
-
-	showInfo(){
-		console.log("This does work");
-		console.log(this.x); 		// undefined
-		console.log(this.someText); // undefined
-		console.log(this.goods[0]); // returns nothing
 	}
 }
