@@ -5,14 +5,25 @@
 		<link rel="stylesheet" type="text/css" href="http://localhost:3000/public/css/style.css"> 
 	</head>
 	<body><div id="info">Description</div>
+		<div class="RobotControl">
+			<form>
+				<label for="koordinaten">Koordinaten: 
+					<input id="koordinaten"  min="0" value="0 0 0"></label>
+				<label>BMI:
+				  <output></output>
+				</label>
+				<button type="button" id="calc">BMI berechnen</button>
+		  	</form>
+		</div>
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.js"></script>
-		<script src="http://localhost:3000/public/Events.js"></script>
-		
 		<script src="http://localhost:3000/public/StorageUnit.js"></script>
 		<script src="http://localhost:3000/public/Robot.js"></script>
 		<script src="http://localhost:3000/public/Pipe.js"></script>
 		<script src="http://localhost:3000/public/Config.js"></script>
-		<script src="http://localhost:3000/public/Stats.js"></script>
+		<script src="http://localhost:3000/public/Stats.js"></script> 
+		<script src="http://localhost:3000/public/Events.js"></script>
+		<script src="http://localhost:3000/public/Order.js"></script>
 		<script> 
 			//setup
 			var scene = new THREE.Scene();

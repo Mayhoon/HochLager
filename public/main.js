@@ -20,6 +20,8 @@ var animate = function () {
 	dt = clock.getDelta();
 	scene.rotation.y += 0.2 * dt;	
 
+	robot.work();
+
 	renderer.render( scene, cam );
 	requestAnimationFrame( animate );
 

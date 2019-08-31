@@ -18,6 +18,18 @@ function onMouseDown( event ){
 	}
 }
 
+//Issue new order for the robot to take care of
+document.querySelector('#calc').addEventListener('click', berechne_BMI);
+  function berechne_BMI () {
+	var str = (document.getElementById("koordinaten")).value.toString();
+	console.log(str);
+	var array = str.split(" ", 3);
+	console.log("Kord:");
+	console.log(array[0]);
+
+	robot.issueOrder(array[0], array[1], array[2]);
+}
+
 window.addEventListener('resize' , () =>{
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	cam.aspect = window.innerWidth / window.innerHeight;
