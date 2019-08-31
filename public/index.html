@@ -4,9 +4,12 @@
 		<title>My first three.js app</title>
 		<link rel="stylesheet" type="text/css" href="http://localhost:3000/public/css/style.css"> 
 	</head>
-	<body>
+	<body><div id="info">Description</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.js"></script>
+		<script src="http://localhost:3000/public/Events.js"></script>
+		
 		<script src="http://localhost:3000/public/StorageUnit.js"></script>
+		<script src="http://localhost:3000/public/Robot.js"></script>
 		<script src="http://localhost:3000/public/Pipe.js"></script>
 		<script src="http://localhost:3000/public/Config.js"></script>
 		<script src="http://localhost:3000/public/Stats.js"></script>
@@ -15,18 +18,13 @@
 			var scene = new THREE.Scene();
 			scene.background = new THREE.Color( 1, 1, 1);
 			var cam = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
-			cam.position.z = 50;
+			cam.position.z = 30;
 			cam.position.x = storageWidth / 4;
+			cam.rotation;
 
 			var renderer = new THREE.WebGLRenderer({antialias: true});
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
-
-			window.addEventListener('resize' , () =>{
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				cam.aspect = window.innerWidth / window.innerHeight;
-				cam.updateProjectionMatrix();
-			})
 		</script>
 		<script type="text/javascript" src="http://localhost:3000/public/Objects.js"></script>
 		<script src="http://localhost:3000/public/main.js"></script>

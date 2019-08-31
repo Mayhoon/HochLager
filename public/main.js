@@ -1,4 +1,5 @@
 var dt;
+var robot;
 var intersects;
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
@@ -24,32 +25,14 @@ var animate = function () {
 
 	stats.end();
 };
-window.addEventListener( 'mousedown', onMouseDown, false );
-window.addEventListener( 'mousemove', onMouseMove, false );
 animate();
 
 function generateStorage(){
-	generateStorageGround();
+	robot = new Robot(0, -1, 0);
+	scene.add(robot.cube);
+	//generateStorageGround();
 	generateStorageUnits();
 	generateStoragePipes();
-}
-
-function onMouseMove( event ) {
-	event.preventDefault();
-	// calculate mouse position in normalized device coordinates	(-1 to +1) for both components
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-	cam.lookAt(mouse.x * 20, mouse.y * 20, 0);
-}
-
-function onMouseDown( event ){
-	//storage[0].showInfo();
-	try{
-		intersects = raycaster.intersectObjects( scene.children );
-		intersects[0].object.callback();
-	}catch(e){
-		
-	}
 }
 
 function addHelperArrows(){
@@ -71,7 +54,7 @@ function generateStorageGround () {
 	var geometry = new THREE.BoxGeometry( storageWidth * storageUnitSize, 0.3, storageWidth * storageUnitSize );
 	var material = new THREE.MeshBasicMaterial( { map: texture } );
 	var t = new THREE.Mesh( geometry, material );
-	t.position.set(0,-10,0);
+	t.position.set(0,-4,0);
 	scene.add(t);
 }
 
@@ -79,13 +62,12 @@ function generateStorageUnits(){
 	for(var width = 0; width < storageWidth ; width++){
 		for(var depth = 0; depth < storageDepth ; depth++){
 			for(var height = 0; height < storageHeight; height++){
-				//*4 lets gaps inbetween for pipes
-				storage.push(new StorageUnit(width*pipeXPosInterval, height*storageUnitSize, depth*pipeXPosInterval));
+				storage.push(new StorageUnit(width, height, depth));
 			}
 		}
 	}	
 	for(let i in storage){
-		scene.add(storage[i].cube);
+		scene.add(storage[i].cube); 	
 	}
 }
 
