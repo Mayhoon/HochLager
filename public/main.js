@@ -2,7 +2,6 @@ var dt;
 var robot;
 var intersects;
 var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2();
 var stats = new Stats();
 
 stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -15,12 +14,12 @@ addHelperArrows();
 
 //animate
 var animate = function () {
-	raycaster.setFromCamera( mouse, cam );	
 	stats.begin();
 	dt = clock.getDelta();
-	scene.rotation.y += 0.2 * dt;	
 
-	robot.work();
+	raycaster.setFromCamera( mouse, cam );
+	controls.update();
+	robot.work();	
 
 	renderer.render( scene, cam );
 	requestAnimationFrame( animate );

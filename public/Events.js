@@ -1,3 +1,4 @@
+var mouse = new THREE.Vector2();
 window.addEventListener( 'mousedown', onMouseDown, false );
 window.addEventListener( 'mousemove', onMouseMove, false );
 
@@ -11,6 +12,7 @@ function onMouseMove( event ) {
 
 function onMouseDown( event ){
 	try{
+		raycaster.setFromCamera( mouse, cam );
 		intersects = raycaster.intersectObjects( scene.children );
 		intersects[0].object.callback();
 	}catch(e){
@@ -22,11 +24,7 @@ function onMouseDown( event ){
 document.querySelector('#calc').addEventListener('click', berechne_BMI);
   function berechne_BMI () {
 	var str = (document.getElementById("koordinaten")).value.toString();
-	console.log(str);
 	var array = str.split(" ", 3);
-	console.log("Kord:");
-	console.log(array[0]);
-
 	robot.issueOrder(array[0], array[1], array[2]);
 }
 
@@ -35,3 +33,17 @@ window.addEventListener('resize' , () =>{
 	cam.aspect = window.innerWidth / window.innerHeight;
 	cam.updateProjectionMatrix();
 })
+
+window.addEventListener('keydown', () =>{
+	console.log("Key" + event.key);
+	var key = event.key;
+	switch(event.key){
+		case " ": 
+			console.log("Rotation stopped");
+			if(controls.autoRotate == true){
+				controls.autoRotate = false
+			}else {
+				controls.autoRotate = true;	
+			} break;
+	}
+});

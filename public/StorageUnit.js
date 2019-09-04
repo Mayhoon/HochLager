@@ -11,6 +11,7 @@ class StorageUnit{
 			console.log(this.pos.x); 		
 			console.log(this.pos.y);
 			console.log(this.pos.z); 
+			robot.issueOrder(this.pos.x, this.pos.y, this.pos.z);
 		}); 	
 	
 		this.cube.position.set(this.pos.x, this.pos.y, this.pos.z);

@@ -2,6 +2,10 @@ class Robot {
 	constructor(x,y,z){
 		this.orders = [];
 
+		this.xReached = false;
+		this.yReached = false;
+		this.zReached = false;
+
 		this.pos = new THREE.Vector3(x * storageUnitSize,y * robotWidth,z * storageUnitSize);
 		this.texture = new THREE.TextureLoader().load( localhost+'assets/Images/robot.jpg' );
 		this.geometry = new THREE.BoxGeometry( robotWidth, robotHeight, robotDepth );
@@ -16,30 +20,61 @@ class Robot {
 	issueOrder(x,y,z){
 		console.log("New stock order taken. Order issued for unit located at: " + x,y,z);
 		this.orders.push(new Order(x,y,z));
+
+		this.x = this.cube.position.x;
+		this.y = this.cube.position.y;
+		this.z = this.cube.position.z;
 	}
 
 	moveTo(orderLocation){
-		var [xReached,yReached,zReached] = [false,false,false];
 		console.log("X POS: " + this.cube.position.x);
 		console.log("Y POS: " + this.cube.position.y);
 		console.log("Z POS: " + this.cube.position.z);
-		
-		if(this.cube.position.x < orderLocation.x){
-			this.cube.position.x += robotSpeedX * dt;
 
-		}else if(this.cube.position.x > orderLocation.x){
-			this.cube.position.x -= robotSpeedX * dt;
+		var targetX = orderLocation.x;
+		var targetY = orderLocation.y;
+		var targetZ = orderLocation.z;
 
-		}else if(this.cube.position.z != orderLocation.z){
-			this.cube.position.z += robotSpeedZ * dt;
+		if(!this.xReached){
+			if(this.x < targetX && this.cube.position.x < targetX){
+				this.cube.position.x += robotSpeedX * dt;
+			}else if(this.x > targetX && this.cube.position.x > targetX){
+				this.cube.position.x -= robotSpeedX * dt;
+			}else {
+				this.xReached = true;
+			}
 
-		}else if(this.cube.position.y != orderLocation.y){
-			this.cube.position.y += robotSpeedY * dt;
+		}else if(!this.yReached){
+			if(this.y < targetY && this.cube.position.y < targetY){
+				this.cube.position.y += robotSpeedY * dt;
+			}else if(this.y > targetY && this.cube.position.y > targetY){
+				this.cube.position.y -= robotSpeedY * dt;
+			}else {
+				this.yReached = true;
+			}
 
-		}else if(this.orders.length != 0){
-			console.log("Finished first order entry. Proceeding to work on the next");
-			this.orders[0] = null;
+		}else if(!this.zReached){
+			if(this.z < targetZ && this.cube.position.z < targetZ){
+				this.cube.position.z += robotSpeedZ * dt;
+			}else if(this.z > targetZ && this.cube.position.z > targetZ){
+				this.cube.position.z -= robotSpeedZ * dt;
+			}else {
+				this.zReached = true;
+			}
 		}
+		else if(this.orders.length != 0){
+			this.cube.position.x = Math.round(this.cube.position.x);
+			this.cube.position.y = Math.round(this.cube.position.y);
+			this.cube.position.z = Math.round(this.cube.position.z);
+
+			this.xReached = false;
+			this.yReached = false;
+			this.zReached = false;
+
+			console.log("Finished first order entry. Proceeding to work on the next");
+			console.log(this.cube.position.x);
+			this.orders.length = 0;
+		}		
 	}
 
 	work(){
