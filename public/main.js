@@ -31,6 +31,7 @@ animate();
 function generateStorage(){
 	robot = new Robot(0, -1, 0);
 	scene.add(robot.cube);
+	
 	//generateStorageGround();
 	generateStorageUnits();
 	generateStoragePipes();
