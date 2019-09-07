@@ -30,12 +30,21 @@
 			var scene = new THREE.Scene();
 			scene.background = new THREE.Color( 1, 1, 1);
 
+			scene.add(new THREE.AmbientLight(0xffffff, .5));
+			var light = new THREE.DirectionalLight(0xffffff, .5);
+			light.position.set(20, 20, -10);
+			scene.add(light);
+
 			var cam = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 0.1, 1000 );
 			cam.position.z = 30;
 			cam.position.x = storageWidth / 4;
 
 			var renderer = new THREE.WebGLRenderer({antialias: true});
 			renderer.setSize( window.innerWidth, window.innerHeight );
+
+			renderer.shadowMap.enabled = true;
+			renderer.shadowMap.type = THREE.BasicShadowMap;
+			
 			document.body.appendChild( renderer.domElement );
 
 			var controls = new THREE.OrbitControls( cam , renderer.domElement );

@@ -63,22 +63,28 @@ class Robot {
 		}*/
 		else if(this.orders.length != 0){
 			this.cube.position.x = Math.round(this.cube.position.x);
-			this.cube.position.y = Math.round(this.cube.position.y);
+			this.cube.position.y = Math.round(this.cube.position.y)+robotHeight/2;
 			this.cube.position.z = Math.round(this.cube.position.z);
 
 			this.xReached = false;
 			this.yReached = false;
 			this.zReached = false;
 
-			var ray = new THREE.Raycaster();
-			ray.set(this.cube.position, new THREE.Vector3(0, 5, 0));
-			var intersects = ray.intersectObjects(scene.children);
-
-			console.log("INTERSECTING WITH OBJECT: ");
-			console.log(intersects[0].object);
-
+			try{
+				console.log("SCENE " + scene.children[0]);
+				var direction =  new THREE.Vector3(0, 50, 0); direction.normalize();
+				var origin = new THREE.Vector3( this.cube.position.x, this.cube.position.y, this.cube.position.z);
+				var ray = new THREE.Raycaster();
+				ray.set(origin,direction);
+				var intersects = ray.intersectObjects(scene.children,true);
+				console.log("moin" + intersects[0].object.callback("robot").test);
+					
+			}catch(e){
+				console.log("This colummn is empty");
+				console.log(e);
+			}
+		
 			console.log("Finished first order entry. Proceeding to work on the next");
-			console.log(this.cube.position.x);
 			this.orders.length = 0;
 		}		
 	}

@@ -12,34 +12,34 @@ function onMouseMove( event ) {
 
 function onMouseDown( event ){
 	try{
+		var raycaster = new THREE.Raycaster();
 		raycaster.setFromCamera( mouse, cam );
-		intersects = raycaster.intersectObjects( scene.children );
-		intersects[0].object.callback();
+		var intersects = raycaster.intersectObjects( scene.children );
+		intersects[0].object.callback("clicked");
 	}catch(e){
-		
+	
 	}
 }
 
 //Issue new order for the robot to take care of
-document.querySelector('#calc').addEventListener('click', berechne_BMI);
+document.querySelector('#calc').addEventListener('click', berechne_BMI );
   function berechne_BMI () {
 	var str = (document.getElementById("koordinaten")).value.toString();
 	var array = str.split(" ", 3);
 	robot.issueOrder(array[0], array[1], array[2]);
 }
 
-window.addEventListener('resize' , () =>{
+window.addEventListener( 'resize' , () =>{
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	cam.aspect = window.innerWidth / window.innerHeight;
 	cam.updateProjectionMatrix();
 })
 
-window.addEventListener('keydown', () =>{
+window.addEventListener( 'keydown' , () =>{
 	console.log("Key" + event.key);
 	var key = event.key;
 	switch(event.key){
-		case " ": 
-			console.log("Rotation stopped");
+		case " ":	//Rotation 	
 			if(controls.autoRotate == true){
 				controls.autoRotate = false
 			}else {

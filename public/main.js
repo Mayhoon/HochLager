@@ -1,7 +1,5 @@
 var dt;
 var robot;
-var intersects;
-var raycaster = new THREE.Raycaster();
 var stats = new Stats();
 
 stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -17,7 +15,7 @@ var animate = function () {
 	stats.begin();
 	dt = clock.getDelta();
 
-	raycaster.setFromCamera( mouse, cam );
+	//raycaster.setFromCamera( mouse, cam );
 	controls.update();
 	robot.work();	
 
@@ -29,12 +27,12 @@ var animate = function () {
 animate();
 
 function generateStorage(){
-	robot = new Robot(0, -1, 0);
-	scene.add(robot.cube);
-	
 	//generateStorageGround();
 	generateStorageUnits();
 	generateStoragePipes();
+
+	robot = new Robot(0, -1, 0);
+	scene.add(robot.cube);
 }
 
 function addHelperArrows(){
