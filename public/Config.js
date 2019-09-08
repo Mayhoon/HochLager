@@ -16,6 +16,7 @@ const storageMaxCapacity = storageWidth + storageHeight + storageDepth;
 //must be 3 : 1 ratio
 const storageUnitSize = 3;
 const storagePipeThickness = storageUnitSize / 3;
+const storageUnitSides = 2; //Amount of meshes per axis
 
 const robotSpeedX = 1;
 const robotSpeedY = 1;

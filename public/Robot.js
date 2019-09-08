@@ -1,3 +1,5 @@
+var ray;
+var intersects;
 class Robot {
 	constructor(x,y,z){
 		this.orders = [];
@@ -71,17 +73,18 @@ class Robot {
 			this.zReached = false;
 
 			try{
-				console.log("SCENE " + scene.children[0]);
 				var direction =  new THREE.Vector3(0, 50, 0); direction.normalize();
 				var origin = new THREE.Vector3( this.cube.position.x, this.cube.position.y, this.cube.position.z);
-				var ray = new THREE.Raycaster();
+				ray = new THREE.Raycaster();
 				ray.set(origin,direction);
-				var intersects = ray.intersectObjects(scene.children,true);
-				console.log("moin" + intersects[0].object.callback("robot").test);
+				intersects = ray.intersectObjects(scene.children,true);
+
+				for(var i = 0; i < intersects.length; i+=storageUnitSides){
+					console.log("Intersected; " + intersects[i].object.callback("robot").cube.position.y);
+				}
 					
 			}catch(e){
 				console.log("This colummn is empty");
-				console.log(e);
 			}
 		
 			console.log("Finished first order entry. Proceeding to work on the next");

@@ -8,7 +8,7 @@ document.body.appendChild( stats.dom );
 //scene
 generateStorage();
 addLight();
-addHelperArrows();
+//addHelperArrows();
 
 //animate
 var animate = function () {
@@ -59,10 +59,13 @@ function generateStorageGround () {
 }
 
 function generateStorageUnits(){
+	var id = 1;
 	for(var width = 0; width < storageWidth ; width++){
 		for(var depth = 0; depth < storageDepth ; depth++){
 			for(var height = 0; height < storageHeight; height++){
-				storage.push(new StorageUnit(width, height, depth));
+				storage.push(new StorageUnit(width, height, depth, id));
+				//console.log("ID; " + id + " LENGTH: " + storage.length);
+				id++;
 			}
 		}
 	}	

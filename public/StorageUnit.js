@@ -1,6 +1,6 @@
 class StorageUnit{
-	constructor( x,y,z ){	
-		this.test = 10;
+	constructor( x,y,z,id ){	
+		this.id = id;
 		this.pos = new THREE.Vector3(x * pipeXPosInterval,y * storageUnitSize,z * pipeXPosInterval);
 		this.texture = new THREE.TextureLoader().load( localhost+'assets/Images/crate0/crate0_diffuse.png' );
 		this.geometry = new THREE.BoxGeometry( storageUnitSize, storageUnitSize, storageUnitSize );
@@ -15,15 +15,14 @@ class StorageUnit{
 		this.cube.callback = (( event ) => {
 			switch(event){
 				case 'clicked': 
-				robot.issueOrder(this.pos.x, this.pos.y, this.pos.z);
+					robot.issueOrder(this.pos.x, this.pos.y, this.pos.z);
 				break;
 
 				case 'robot':
-				return this;
+					return this;
 				break;
 			}
 		}); 
-
 		this.cube.position.set(this.pos.x, this.pos.y, this.pos.z);
 	}
 }

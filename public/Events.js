@@ -11,13 +11,44 @@ function onMouseMove( event ) {
 }
 
 function onMouseDown( event ){
-	try{
-		var raycaster = new THREE.Raycaster();
-		raycaster.setFromCamera( mouse, cam );
-		var intersects = raycaster.intersectObjects( scene.children );
-		intersects[0].object.callback("clicked");
-	}catch(e){
+	if(event.which == 1){
+		try{
+			var raycaster = new THREE.Raycaster();
+			raycaster.setFromCamera( mouse, cam );
+			var intersects = raycaster.intersectObjects( scene.children );
+			if(intersects != 0){
+				console.log("Nothing happens");
+			}
+		}catch(e){
+		
+		}
+	}
+	//Left mouse button
+	else if(event.which == 2){
+		try{
+			var raycaster = new THREE.Raycaster();
+			raycaster.setFromCamera( mouse, cam );
+			var intersects = raycaster.intersectObjects( scene.children );
+			intersects[0].object.callback("clicked").id;
+		}catch(e){
+		
+		}
+	}
+	else if(event.which == 3){
+		try{
+			var raycaster = new THREE.Raycaster();
+			raycaster.setFromCamera( mouse, cam );
+			var intersects = raycaster.intersectObjects( scene.children );
 	
+			console.log("ID: " + intersects[0].object.callback("robot").id);
+			scene.remove( intersects[0].object.callback("robot").cube );
+
+			var obj =  intersects[0].object.callback("robot").id;
+			storage[ obj-1  ] = null;	
+			
+		}catch(e){
+		
+		}
 	}
 }
 
@@ -39,11 +70,13 @@ window.addEventListener( 'keydown' , () =>{
 	console.log("Key" + event.key);
 	var key = event.key;
 	switch(event.key){
-		case " ":	//Rotation 	
+		//Rotation 	
+		case " ":	
 			if(controls.autoRotate == true){
 				controls.autoRotate = false
 			}else {
-				controls.autoRotate = true;	
-			} break;
+			controls.autoRotate = true;	
+			}
+		break;
 	}
 });
