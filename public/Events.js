@@ -11,6 +11,7 @@ function onMouseMove( event ) {
 }
 
 function onMouseDown( event ){
+	//Left mouse button
 	if(event.which == 1){
 		try{
 			var raycaster = new THREE.Raycaster();
@@ -23,7 +24,7 @@ function onMouseDown( event ){
 		
 		}
 	}
-	//Left mouse button
+	//Middle mouse button
 	else if(event.which == 2){
 		try{
 			var raycaster = new THREE.Raycaster();
@@ -34,6 +35,7 @@ function onMouseDown( event ){
 		
 		}
 	}
+	//Right mouse button
 	else if(event.which == 3){
 		try{
 			var raycaster = new THREE.Raycaster();
@@ -53,7 +55,7 @@ function onMouseDown( event ){
 }
 
 //Issue new order for the robot to take care of
-document.querySelector('#calc').addEventListener('click', berechne_BMI );
+document.querySelector('#sendRobotToCoordinates').addEventListener('click', berechne_BMI );
   function berechne_BMI () {
 	var str = (document.getElementById("koordinaten")).value.toString();
 	var array = str.split(" ", 3);

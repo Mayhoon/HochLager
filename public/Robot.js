@@ -8,7 +8,7 @@ class Robot {
 		this.yReached = false;
 		this.zReached = false;
 
-		this.pos = new THREE.Vector3(x * storageUnitSize,y * storageUnitSize + robotHeight / 2,z * storageUnitSize);
+		this.pos = new THREE.Vector3(x * storageUnitSize, -spaceForRobot + robotHeight /2, z * storageUnitSize);
 		this.texture = new THREE.TextureLoader().load( localhost+'assets/Images/robot.jpg' );
 		this.geometry = new THREE.BoxGeometry( robotWidth, robotHeight, robotDepth );
 		this.geometry.applyMatrix( new THREE.Matrix4().makeTranslation(0, -storageUnitSize / 2, 0) );	// changes the center 
@@ -28,11 +28,6 @@ class Robot {
 	}
 
 	moveTo(orderLocation){
-		/*
-		console.log("X POS: " + this.cube.position.x);
-		console.log("Y POS: " + this.cube.position.y);
-		console.log("Z POS: " + this.cube.position.z);
-		*/
 		var targetX = orderLocation.x;
 		var targetY = orderLocation.y;
 		var targetZ = orderLocation.z;

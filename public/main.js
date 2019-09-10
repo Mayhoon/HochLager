@@ -10,6 +10,21 @@ generateStorage();
 addLight();
 //addHelperArrows();
 
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange == function () {
+	if(this.readyState == 4 && this.status == 200 ){
+		console.log(xhttp.responseText);
+	}
+}
+xhttp.open("GET", "person.json", true); 
+xhttp.send();
+
+console.log(person);
+person = JSON.stringify(person);
+person = JSON.parse(person);
+
+
+
 //animate
 var animate = function () {
 	stats.begin();
@@ -27,11 +42,11 @@ var animate = function () {
 animate();
 
 function generateStorage(){
-	//generateStorageGround();
 	generateStorageUnits();
 	generateStoragePipes();
+	generateStorageGround();
 
-	robot = new Robot(0, -1, 0);
+	robot = new Robot(0, 0, 0);	
 	scene.add(robot.cube);
 }
 
@@ -50,11 +65,20 @@ function addLight(){
 }
 
 function generateStorageGround () {
-	var texture = new THREE.TextureLoader().load(localhost+'assets/Images/metallic3.jpg',); 
-	var geometry = new THREE.BoxGeometry( storageWidth * storageUnitSize, 0.3, storageWidth * storageUnitSize );
+	var texture = new THREE.TextureLoader().load(localhost+'assets/Images/metallic5.jpg',); 
+	var geometry = new THREE.BoxGeometry( 
+		storageWidth * storageUnitSize + ((storageWidth+1) * storagePipeThickness), 
+		storageGroundThickness, 
+		storageDepth * storageUnitSize + ((storageDepth+1) * storagePipeThickness));
 	var material = new THREE.MeshBasicMaterial( { map: texture } );
+
+	geometry.applyMatrix( new THREE.Matrix4().makeTranslation(0, -storageUnitSize/2, 0) );	
+
 	var t = new THREE.Mesh( geometry, material );
-	t.position.set(0,-4,0);
+	t.position.set((
+		storageWidth * storageUnitSize)/2 - storagePipeThickness/2, 
+		storageGroundPositionY, 
+		(storageDepth * storageUnitSize)/2 - storagePipeThickness/2);
 	scene.add(t);
 }
 
@@ -64,7 +88,6 @@ function generateStorageUnits(){
 		for(var depth = 0; depth < storageDepth ; depth++){
 			for(var height = 0; height < storageHeight; height++){
 				storage.push(new StorageUnit(width, height, depth, id));
-				//console.log("ID; " + id + " LENGTH: " + storage.length);
 				id++;
 			}
 		}

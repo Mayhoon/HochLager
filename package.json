@@ -11,7 +11,11 @@
   "dependencies": {
     "console-log-div": "^0.6.3",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "fs-js": "^1.0.6",
     "loadscreen": "^0.18.14",
+    "require": "^2.4.20",
+    "requirejs": "^2.3.6",
     "stats.js": "^0.17.0",
     "three-orbitcontrols-ts": "^0.1.2"
   }
