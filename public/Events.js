@@ -26,14 +26,18 @@ function onMouseDown( event ){
 	}
 	//Middle mouse button
 	else if(event.which == 2){
-		try{
+		//try{
 			var raycaster = new THREE.Raycaster();
 			raycaster.setFromCamera( mouse, cam );
 			var intersects = raycaster.intersectObjects( scene.children );
-			intersects[0].object.callback("clicked").id;
-		}catch(e){
-		
-		}
+			console.log(intersects[0].object.callback("robot").cube.position.x);
+			console.log(intersects[0].object.callback("robot").cube.position.y);
+			console.log(intersects[0].object.callback("robot").cube.position.z);
+			intersects[0].object.callback("order"); //Issue order for 
+			
+	//	}catch(e){
+			console.log("Middle Mouse Button doesnt work properly");
+		//}
 	}
 	//Right mouse button
 	else if(event.which == 3){
@@ -49,7 +53,7 @@ function onMouseDown( event ){
 			storage[ obj-1  ] = null;	
 			
 		}catch(e){
-		
+			
 		}
 	}
 }
@@ -70,7 +74,6 @@ window.addEventListener( 'resize' , () =>{
 
 window.addEventListener( 'keydown' , () =>{
 	console.log("Key" + event.key);
-	var key = event.key;
 	switch(event.key){
 		//Rotation 	
 		case " ":	

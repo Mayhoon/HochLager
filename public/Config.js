@@ -17,14 +17,15 @@ const storageMaxCapacity = storageWidth + storageHeight + storageDepth;
 const storageUnitSize = 3;
 const storageUnitSides = 2; //Amount of meshes per axis
 
-const robotSpeedX = 1;
-const robotSpeedY = 1;
-const robotSpeedZ = 1;
-const spaceForRobot = 1 * storageUnitSize;
 
 const robotWidth = 3 ;
 const robotHeight = 0.2;
 const robotDepth = 3;
+
+const robotSpeedX = 1;
+const robotSpeedY = 1;
+const robotSpeedZ = 1;
+const spaceForRobot = 1 * storageUnitSize + robotHeight;
 
 const storageGroundThickness = 0.3;
 const storageGroundPositionY = -spaceForRobot - storageGroundThickness/2;

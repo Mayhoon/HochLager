@@ -10,21 +10,6 @@ generateStorage();
 addLight();
 //addHelperArrows();
 
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange == function () {
-	if(this.readyState == 4 && this.status == 200 ){
-		console.log(xhttp.responseText);
-	}
-}
-xhttp.open("GET", "person.json", true); 
-xhttp.send();
-
-console.log(person);
-person = JSON.stringify(person);
-person = JSON.parse(person);
-
-
-
 //animate
 var animate = function () {
 	stats.begin();
