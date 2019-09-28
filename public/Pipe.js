@@ -1,6 +1,6 @@
 class Pipe {
 	constructor(x,y,z){		
-		this.texture = new THREE.TextureLoader().load(localhost+'assets/Images/metallic3.jpg',); 
+		this.texture = new THREE.TextureLoader().load(localhost+'public/assets/Images/metallic3.jpg',); 
 		this.geometry = new THREE.BoxGeometry( storagePipeThickness, storagePipeHeight, storagePipeThickness );
 		// changes the center of the object down by one unit
 		this.geometry.applyMatrix( new THREE.Matrix4().makeTranslation(0, -storageUnitSize / 2, 0) );	

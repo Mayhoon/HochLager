@@ -10,57 +10,45 @@ function onMouseMove( event ) {
 	cam.lookAt(mouse.x * 20, mouse.y * 20, 0);
 }
 
+//Mouse click detecion
 function onMouseDown( event ){
-	//Left mouse button
-	if(event.which == 1){
+
+	if(event.which == eventLeftMouseButton){
 		try{
 			var raycaster = new THREE.Raycaster();
 			raycaster.setFromCamera( mouse, cam );
 			var intersects = raycaster.intersectObjects( scene.children );
-			if(intersects != 0){
-				console.log("Nothing happens");
-			}
+			if(intersects == 0){
+				console.log("No object selected");
+			}console.log(intersects[0].object.position);
 		}catch(e){
 		
 		}
 	}
-	//Middle mouse button
-	else if(event.which == 2){
-		//try{
+
+	else if(event.which == eventMiddleMouseButton){
+		try{
 			var raycaster = new THREE.Raycaster();
 			raycaster.setFromCamera( mouse, cam );
 			var intersects = raycaster.intersectObjects( scene.children );
 			console.log(intersects[0].object.callback("robot").cube.position.x);
 			console.log(intersects[0].object.callback("robot").cube.position.y);
 			console.log(intersects[0].object.callback("robot").cube.position.z);
-			intersects[0].object.callback("order"); //Issue order for 
-			
-	//	}catch(e){
-			console.log("Middle Mouse Button doesnt work properly");
-		//}
-	}
-	//Right mouse button
-	else if(event.which == 3){
-		try{
-			var raycaster = new THREE.Raycaster();
-			raycaster.setFromCamera( mouse, cam );
-			var intersects = raycaster.intersectObjects( scene.children );
-	
-			console.log("ID: " + intersects[0].object.callback("robot").id);
-			scene.remove( intersects[0].object.callback("robot").cube );
+			intersects[0].object.callback("order"); //Issue order 
 
-			var obj =  intersects[0].object.callback("robot").id;
-			storage[ obj-1  ] = null;	
-			
 		}catch(e){
 			
 		}
 	}
+
+	else if(event.which == eventRightMouseButton){
+		storage.removeUnit();
+	}
 }
 
-//Issue new order for the robot to take care of
-document.querySelector('#sendRobotToCoordinates').addEventListener('click', berechne_BMI );
-  function berechne_BMI () {
+//Issue new order for Unit at given coordinates
+document.querySelector('#sendRobotToCoordinates').addEventListener('click', issueOrderManually );
+  function issueOrderManually () {
 	var str = (document.getElementById("koordinaten")).value.toString();
 	var array = str.split(" ", 3);
 	robot.issueOrder(array[0], array[1], array[2]);

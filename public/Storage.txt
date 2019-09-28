@@ -1,5 +1,0 @@
-class Storage {
-    constructor(){
-        this.storage = [];
-    }
-}

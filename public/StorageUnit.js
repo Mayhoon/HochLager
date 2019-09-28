@@ -3,16 +3,19 @@ class StorageUnit{
 		this.id = id;
 		this.moving = true;
 
-		this.texture = new THREE.TextureLoader().load( localhost+'assets/Images/crate0/crate0_diffuse.png' );
-		this.geometry = new THREE.BoxGeometry( storageUnitSize, storageUnitSize, storageUnitSize );
-		this.material = new THREE.MeshBasicMaterial( { map: this.texture } );
+		const textureLoader = new THREE.TextureLoader();
 
+		this.texture = textureLoader.load(localhost+'assets/Images/crate0/crate0_diffuse.png');
+		this.texture.encoding = THREE.sRGBEncoding;
+		this.texture.anisotropy = 16;
+		this.material = new THREE.MeshStandardMaterial ( {map: this.texture, flatShading: true} );
+		this.material.castShadow = true;
+		this.material.receiveShadow = true;
+	
+		this.geometry = new THREE.BoxGeometry( storageUnitSize, storageUnitSize, storageUnitSize );
+		//this.geometry = new THREE.SphereGeometry( 2, 6, 6 );
 		this.cube = new THREE.Mesh( this.geometry, this.material );
 		this.cube.position.set(x * pipeXPosInterval, y * storageUnitSize, z * pipeXPosInterval);
-		
-		//Shader?
-		this.material.castShadow = true;
-		this.material.receiveShadow  = true;
 
 		//when being clicked
 		this.cube.callback = (( event ) => {
@@ -27,7 +30,6 @@ class StorageUnit{
 			}
 		}); 
 	}
-
 	moveDownTo(y){
 		if(this.cube.position.y >= y + storageUnitSize/2){
 			this.cube.position.y += y * dt * 2; 

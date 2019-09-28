@@ -8,7 +8,7 @@ class Robot {
 		this.yReached = false;
 		this.zReached = false;
 
-		this.texture = new THREE.TextureLoader().load( localhost+'assets/Images/robot.jpg' );
+		this.texture = new THREE.TextureLoader().load( localhost+'public/assets/Images/robot.jpg' );
 		this.geometry = new THREE.BoxGeometry( robotWidth, robotHeight, robotDepth );
 		//this.geometry.applyMatrix( new THREE.Matrix4().makeTranslation(0, -storageUnitSize / 2, 0) );	// changes the center 
 		this.material = new THREE.MeshBasicMaterial( { map: this.texture } );
@@ -48,8 +48,10 @@ class Robot {
 	moveToX(orderPosX){
 		if(this.x < orderPosX && this.cube.position.x < orderPosX){
 			this.cube.position.x += robotSpeedX * dt;
+
 		}else if(this.x > orderPosX && this.cube.position.x > orderPosX){
 			this.cube.position.x -= robotSpeedX * dt;
+			
 		}else {
 			this.xReached = true;
 		}
@@ -58,8 +60,10 @@ class Robot {
 	moveToZ(orderPosZ){
 		if(this.z < orderPosZ && this.cube.position.z < orderPosZ){
 			this.cube.position.z += robotSpeedZ * dt;
+
 		}else if(this.z > orderPosZ && this.cube.position.z > orderPosZ){
 			this.cube.position.z -= robotSpeedZ * dt;
+
 		}else {
 			this.zReached = true;
 		}

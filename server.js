@@ -1,3 +1,4 @@
+const port = 80;
 var express = require('express');
 var app = express();
 //var app = require('express')();
@@ -10,6 +11,6 @@ app.get('/', function(req, res){
   res.sendFile(__dirname+'/public/index.html');
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(port, function(){
+  console.log('listening on *:' + port);
 });

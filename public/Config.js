@@ -1,12 +1,15 @@
 //Server
-const localhost = "http://localhost:3000/";
+const localhost = document.location.href;
 
 //Time
 const clock = new THREE.Clock();
 
 //Storage
-const storage = [];
 const pipes = [];
+
+const eventRightMouseButton = 3;
+const eventMiddleMouseButton = 2;
+const eventLeftMouseButton = 1;
 
 const storageWidth = 3;
 const storageDepth = 3;
@@ -15,8 +18,7 @@ const storageMaxCapacity = storageWidth + storageHeight + storageDepth;
 
 //must be 3 : 1 ratio
 const storageUnitSize = 3;
-const storageUnitSides = 2; //Amount of meshes per axis
-
+const storageUnitSides = 2; 
 
 const robotWidth = 3 ;
 const robotHeight = 0.2;

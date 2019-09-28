@@ -1,13 +1,13 @@
 var dt;
 var robot;
 var stats = new Stats();
+var storage = new Storage();
 
-stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild( stats.dom );
 
 //scene
-generateStorage();
-addLight();
+init();
 //addHelperArrows();
 
 //animate
@@ -26,11 +26,7 @@ var animate = function () {
 };
 animate();
 
-function generateStorage(){
-	generateStorageUnits();
-	generateStoragePipes();
-	generateStorageGround();
-
+function init(){
 	robot = new Robot(0, 0, 0);	
 	scene.add(robot.cube);
 }
@@ -40,13 +36,6 @@ function addHelperArrows(){
 	var yArrow = new THREE.ArrowHelper( new THREE.Vector3(0, 1, 0).normalize(), new THREE.Vector3(0, 0, 0), 20.2, 0x00ff00);
 	var zArrow = new THREE.ArrowHelper( new THREE.Vector3(0, 0, 1).normalize(), new THREE.Vector3(0, 0, 0), 20.2, 0x00ff00);
 	scene.add(xArrow, yArrow, zArrow);
-}
-
-function addLight(){
-	var light = new THREE.PointLight( 0xff0000, 1, 100 );
-	light.position.set( 60, 50, 50 );
-	light.castShadow = true;
-	scene.add( light );
 }
 
 function generateStorageGround () {
@@ -65,21 +54,6 @@ function generateStorageGround () {
 		storageGroundPositionY, 
 		(storageDepth * storageUnitSize)/2 - storagePipeThickness/2);
 	scene.add(t);
-}
-
-function generateStorageUnits(){
-	var id = 1;
-	for(var width = 0; width < storageWidth ; width++){
-		for(var depth = 0; depth < storageDepth ; depth++){
-			for(var height = 0; height < storageHeight; height++){
-				storage.push(new StorageUnit(width, height, depth, id));
-				id++;
-			}
-		}
-	}	
-	for(let i in storage){
-		scene.add(storage[i].cube); 	
-	}
 }
 
 function generateStoragePipes(){

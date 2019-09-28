@@ -1,8 +1,7 @@
-
 <html>
 	<head>
 		<title>Hochlager</title>
-		<link rel="stylesheet" type="text/css" href="http://localhost:3000/public/css/style.css"> 
+		<link rel="stylesheet" type="text/css" href="public/css/style.css"> 
 	</head>
 	<body>
 		<div class="RobotControlCoordinates">
@@ -22,43 +21,44 @@
 		</div>
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.js"></script>
-		<script src="http://localhost:3000/public/require.js"></script>
-		<script src="http://localhost:3000/public/Config.js"></script>
-		<script src="http://localhost:3000/public/StorageUnit.js"></script>
-		<script src="http://localhost:3000/public/OrbitControls.js"></script>
-		<script src="http://localhost:3000/public/Robot.js"></script>
-		<script src="http://localhost:3000/public/Pipe.js"></script>
-		<script src="http://localhost:3000/public/Stats.js"></script> 
-		<script src="http://localhost:3000/public/Events.js"></script>
-		<script src="http://localhost:3000/public/Order.js"></script>
+		<script src="public/require.js"></script>
+		<script src="public/Config.js"></script>
+		<script src="public/Storage.js"></script>
+		<script src="public/StorageUnit.js"></script>
+		<script src="public/OrbitControls.js"></script>
+		<script src="public/Robot.js"></script>
+		<script src="public/Pipe.js"></script>
+		<script src="public/Stats.js"></script> 
+		<script src="public/Events.js"></script>
+		<script src="public/Order.js"></script>
 		<script> 
 			//setup
 			var scene = new THREE.Scene();
-			scene.background = new THREE.Color( 1, 1, 1);
-
-			scene.add(new THREE.AmbientLight(0xffffff, .5));
-			var light = new THREE.DirectionalLight(0xffffff, .5);
-			light.position.set(20, 20, -10);
-			scene.add(light);
+			scene.background = new THREE.Color( 20, 1, 1);
 
 			var cam = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 0.1, 1000 );
 			cam.position.z = 30;
 			cam.position.x = storageWidth / 4;
 
+			//var light = new THREE.PointLight( 0x404040, 3.5 ); // soft white light
+			var light = new THREE.DirectionalLight( 0x404040, 20);
+			light.position.set( 100, 100, 100 );
+			light.castShadow = true;
+			scene.add(light);
+
 			var renderer = new THREE.WebGLRenderer({antialias: true});
 			renderer.setSize( window.innerWidth, window.innerHeight );
-
-			renderer.shadowMap.enabled = true;
-			renderer.shadowMap.type = THREE.BasicShadowMap;
-			document.body.appendChild( renderer.domElement );
+			renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 			var controls = new THREE.OrbitControls( cam , renderer.domElement );
 			controls.autoRotate = true;
 
 			cam.position.set( 0, 20, 100 );
 			controls.update();
+
+			document.body.appendChild( renderer.domElement );
 		</script>
-		<script type="text/javascript" src="http://localhost:3000/public/Objects.js"></script>
-		<script src="http://localhost:3000/public/main.js"></script>
+		<script type="text/javascript" src="public/Objects.js"></script>
+		<script src="public/main.js"></script>
 	</body>
 </html>
