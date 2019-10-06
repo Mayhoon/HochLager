@@ -16,7 +16,7 @@ class Robot {
 		this.cube.position.set(x * storageUnitSize,  y - spaceForRobot - storageUnitSize/2 + robotHeight/2, z * storageUnitSize);
 	}
 
-	work(){
+	run(){
 		if(this.orders.length != 0){
 			this.moveTo(this.orders[this.orders.length-1]);
 		}
@@ -73,25 +73,22 @@ class Robot {
 		this.cube.position.x = Math.round(this.cube.position.x);
 		this.cube.position.z = Math.round(this.cube.position.z);
 
-	//	try{
-			if(this.intersects == undefined){
-				var direction =  new THREE.Vector3(0, 50, 0); direction.normalize();
-				var origin = new THREE.Vector3( this.cube.position.x, this.cube.position.y, this.cube.position.z);
-				var ray = new THREE.Raycaster();
-				ray.set(origin,direction);
-				this.intersects = ray.intersectObjects(scene.children,true);
-			}
 
-			if(this.intersects[0].object.callback("robot").moving){
-					this.intersects[0].object.callback("robot").moveDownTo(this.cube.position.y + robotHeight);
-					this.currentUnit = this.intersects[0].object.callback("robot");
-			}else if(! this.intersects[0].object.callback("robot").moving){
-				this.finishOrder();
-			}
-					
-	/*	}catch(e){
-			console.log("This colummn is empty");
-		}*/
+		if(this.intersects == undefined){
+			var direction =  new THREE.Vector3(0, 50, 0); direction.normalize();
+			var origin = new THREE.Vector3( this.cube.position.x, this.cube.position.y, this.cube.position.z);
+			var ray = new THREE.Raycaster();
+			ray.set(origin,direction);
+			this.intersects = ray.intersectObjects(scene.children,true);
+		}
+
+		if(this.intersects[0].object.callback("robot").moving){
+			console.log("POSITION DES ROBOTERS: " + this.cube.position.y);
+			this.intersects[0].object.callback("robot").moveDownTo(this.cube.position.y + (robotHeight / 2));
+			this.currentUnit = this.intersects[0].object.callback("robot");
+		}else if(! this.intersects[0].object.callback("robot").moving){
+			this.finishOrder();
+		}
 	}
 
 	finishOrder(){

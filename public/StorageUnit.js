@@ -5,15 +5,12 @@ class StorageUnit{
 
 		const textureLoader = new THREE.TextureLoader();
 
-		this.texture = textureLoader.load(localhost+'assets/Images/crate0/crate0_diffuse.png');
+		this.texture = textureLoader.load(localhost+'assets/Images/crate0/test.png');
 		this.texture.encoding = THREE.sRGBEncoding;
 		this.texture.anisotropy = 16;
-		this.material = new THREE.MeshStandardMaterial ( {map: this.texture, flatShading: true} );
-		this.material.castShadow = true;
-		this.material.receiveShadow = true;
+		this.material = new THREE.MeshStandardMaterial ( {map: this.texture, flatShading: false} );
 	
 		this.geometry = new THREE.BoxGeometry( storageUnitSize, storageUnitSize, storageUnitSize );
-		//this.geometry = new THREE.SphereGeometry( 2, 6, 6 );
 		this.cube = new THREE.Mesh( this.geometry, this.material );
 		this.cube.position.set(x * pipeXPosInterval, y * storageUnitSize, z * pipeXPosInterval);
 
@@ -27,15 +24,26 @@ class StorageUnit{
 				case 'robot':
 					return this;
 				break;
+
+				default: 
+					console.log('This input cant be processed');
 			}
 		}); 
 	}
 	moveDownTo(y){
-		if(this.cube.position.y >= y + storageUnitSize/2){
-			this.cube.position.y += y * dt * 2; 
+		if(this.cube.position.y > y + storageUnitSize/2){
+			this.cube.position.y += (y * 2) *dt; 
 			this.moving = true;
 		}else {
 			this.moving = false;
 		}
+	}
+
+	getPosition(){
+		return this.position;
+	}
+
+	setPosition(pos){
+		this.cube.position = pos;
 	}
 }
